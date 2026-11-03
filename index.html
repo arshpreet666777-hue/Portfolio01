@@ -1,0 +1,2162 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Intro animation (plays once per visit; skip with the button, Esc or Enter) -->
+    <script>try{if(!sessionStorage.getItem('apIntroSeen')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('ap-intro-pending')}catch(e){}</script>
+    <style>html.ap-intro-pending body{overflow:hidden}html.ap-intro-pending::after{content:"";position:fixed;inset:0;background:#010200;z-index:9999;animation:apIntroFailsafe 0s 6s forwards}@keyframes apIntroFailsafe{to{visibility:hidden}}</style>
+    <script src="ap-intro/intro.js" defer></script>
+
+    <!-- SEO & Meta Data -->
+    <title>Arshpreet Singh | Creative Motion Designer & Video Editor</title>
+    <meta name="description"
+        content="Portfolio of Arshpreet Singh, a creative Motion Graphics Artist and Video Editor specializing in kinetic typography, VFX, and dynamic video content.">
+    <meta name="keywords" content="Motion Graphics, Video Editor, VFX, After Effects, Premiere Pro, Creative Portfolio, Arshpreet Singh">
+    <meta name="author" content="Arshpreet Singh">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        limebrand: {
+                            DEFAULT: '#A3E635',
+                            neon: '#BFFF00',
+                            dark: '#4D7C0F',
+                            glow: 'rgba(191, 255, 0, 0.25)'
+                        },
+                        obsidian: '#060806',
+                        charcoal: '#0E120E',
+                        surface: '#141A14'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --lime: #BFFF00;
+            --lime-soft: #A3E635;
+            --bg-dark: #060806;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #F4F6F4;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            selection-background-color: var(--lime);
+            selection-color: #000;
+        }
+
+        ::selection {
+            background: var(--lime);
+            color: #050705;
+        }
+
+        /* --- SMART CUSTOM LIME ARROW CURSOR --- */
+        .cursor-dot,
+        .cursor-outline {
+            display: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            body {
+                cursor: none;
+            }
+
+            a,
+            button,
+            .interactive-card,
+            .short-item,
+            .work-card,
+            .motion-card,
+            .sw-icon,
+            .folder-tab,
+            .filter-btn,
+            [onclick] {
+                cursor: none !important;
+            }
+
+            .cursor-dot {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 30px;
+                height: 30px;
+                transform: translate(-3px, -3px);
+                z-index: 10001;
+                pointer-events: none;
+                filter: drop-shadow(0 0 8px rgba(191, 255, 0, 0.85)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8));
+                transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), filter 0.18s ease;
+            }
+
+            .cursor-outline {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 44px;
+                height: 44px;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(191, 255, 0, 0.22) 0%, transparent 70%);
+                z-index: 10000;
+                pointer-events: none;
+                transition: width 0.25s ease, height 0.25s ease, background 0.25s ease;
+            }
+
+            body.hovering .cursor-dot {
+                transform: translate(-3px, -3px) scale(1.18) rotate(-6deg);
+                filter: drop-shadow(0 0 14px rgba(191, 255, 0, 1)) drop-shadow(0 0 24px rgba(191, 255, 0, 0.6));
+            }
+
+            body.hovering .cursor-outline {
+                width: 68px;
+                height: 68px;
+                background: radial-gradient(circle, rgba(191, 255, 0, 0.35) 0%, transparent 70%);
+            }
+        }
+
+        /* --- SUBTLE FILM GRAIN & GRID --- */
+        .bg-grid-pattern {
+            background-size: 48px 48px;
+            background-image: 
+                linear-gradient(to right, rgba(191, 255, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(191, 255, 0, 0.03) 1px, transparent 1px);
+        }
+
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9990;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* --- AMBIENT LIME BLOBS --- */
+        .ambient-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(110px);
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.22;
+            animation: pulseBlob 16s infinite alternate ease-in-out;
+        }
+
+        .blob-1 {
+            top: -15%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, #BFFF00 0%, #1a2e05 70%, transparent 100%);
+        }
+
+        .blob-2 {
+            bottom: -20%;
+            right: -10%;
+            width: 55vw;
+            height: 55vw;
+            background: radial-gradient(circle, #65a30d 0%, #0f1f04 70%, transparent 100%);
+            animation-delay: -7s;
+        }
+
+        @keyframes pulseBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -30px) scale(1.08); }
+        }
+
+        /* --- GLASS & BENTO CARDS --- */
+        .glass-card {
+            background: rgba(16, 22, 16, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(191, 255, 0, 0.45);
+            box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7), 0 0 25px rgba(191, 255, 0, 0.1);
+        }
+
+        .glass-nav {
+            background: rgba(8, 12, 8, 0.78);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(191, 255, 0, 0.16);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        /* --- HERO KINETIC TEXT --- */
+        .stroke-lime {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--lime);
+        }
+
+        .lime-gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 0%, #D9F99D 45%, #BFFF00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-lime {
+            background: var(--lime);
+            color: #050805;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 25px rgba(191, 255, 0, 0.25);
+        }
+
+        .btn-lime:hover {
+            background: #d2ff4d;
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(191, 255, 0, 0.55);
+        }
+
+        .btn-outline-lime {
+            background: rgba(191, 255, 0, 0.05);
+            color: #fff;
+            border: 1px solid rgba(191, 255, 0, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-lime:hover {
+            background: rgba(191, 255, 0, 0.15);
+            border-color: var(--lime);
+            transform: translateY(-2px);
+        }
+
+        /* --- TIMELINE MARQUEE --- */
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 28s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- SHORTS HORIZONTAL TRACK --- */
+        .shorts-track {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding: 12px 4px 28px 4px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--lime) rgba(255, 255, 255, 0.05);
+            scroll-behavior: smooth;
+        }
+
+        .shorts-track::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .shorts-track::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 999px;
+        }
+
+        .shorts-track::-webkit-scrollbar-thumb {
+            background: rgba(191, 255, 0, 0.45);
+            border-radius: 999px;
+        }
+
+        .shorts-track::-webkit-scrollbar-thumb:hover {
+            background: var(--lime);
+        }
+
+        .short-item {
+            width: 210px;
+            min-width: 210px;
+            max-width: 210px;
+            height: 373px;
+            max-height: 373px;
+            flex: 0 0 210px;
+        }
+
+        @media (min-width: 640px) {
+            .short-item {
+                width: 230px;
+                min-width: 230px;
+                max-width: 230px;
+                height: 408px;
+                max-height: 408px;
+                flex: 0 0 230px;
+            }
+        }
+
+        /* --- COLLAPSIBLE FOLDER CONTENT --- */
+        .folder-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.5s ease,
+                        margin-top 0.4s ease;
+        }
+
+        .folder-content.open {
+            max-height: 5000px;
+            opacity: 1;
+            margin-top: 28px;
+        }
+
+        /* --- REVEAL ANIMATION --- */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- TYPEWRITER CURSOR --- */
+        .cursor-blink {
+            display: inline-block;
+            width: 3px;
+            height: 1.1em;
+            background-color: var(--lime);
+            margin-left: 4px;
+            animation: blink 0.85s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* --- MODAL --- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 5, 3, 0.92);
+            backdrop-filter: blur(16px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* --- SCROLL PROGRESS BAR --- */
+        #topScrollBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #65a30d, #BFFF00);
+            box-shadow: 0 0 12px #BFFF00;
+            z-index: 9998;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+    </style>
+</head>
+
+<body class="bg-grid-pattern relative selection:bg-[#BFFF00] selection:text-black">
+
+        <!-- Top Scroll Progress Bar -->
+    <div id="topScrollBar"></div>
+
+    <!-- Right-Side Vertical Scroll Mouse Tracker -->
+    <div class="hidden xl:block fixed top-1/2 right-6 -translate-y-1/2 h-[45vh] w-[2px] bg-white/10 z-40 rounded-full">
+        <div id="scrollFill" class="absolute top-0 left-0 w-full h-0 bg-[#BFFF00] shadow-[0_0_12px_#BFFF00] rounded-full"></div>
+        <div id="scrollMouse" class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-10 drop-shadow-[0_0_8px_#BFFF00] transition-all duration-75">
+            <svg width="100%" height="100%" viewBox="0 0 30 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 2C8.925 2 4 6.925 4 13V35C4 41.075 8.925 46 15 46C21.075 46 26 41.075 26 35V13C26 6.925 21.075 2 15 2Z" stroke="white" stroke-width="2" fill="rgba(191,255,0,0.08)" />
+                <rect x="13" y="9" width="4" height="7" rx="2" fill="#BFFF00" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Custom Lime Arrow Cursor -->
+    <div class="cursor-dot" data-cursor-dot>
+        <svg viewBox="0 0 32 32" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="limeCursorGrad" x1="3" y1="3" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#E6FF66" />
+                    <stop offset="55%" stop-color="#BFFF00" />
+                    <stop offset="100%" stop-color="#84CC16" />
+                </linearGradient>
+            </defs>
+            <path d="M4 3L28 13.5L17.2 17.2L13.5 28L4 3Z"
+                fill="url(#limeCursorGrad)"
+                stroke="#F7FEE7"
+                stroke-width="1.6"
+                stroke-linejoin="round" />
+        </svg>
+    </div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- Film Grain -->
+    <div class="grain-overlay"></div>
+
+    <!-- Ambient Background Blobs -->
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+
+    <!-- Back to Top Floating Button -->
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        aria-label="Back to top"
+        class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-[#111711]/90 border border-[#BFFF00]/40 text-[#BFFF00] flex items-center justify-center shadow-lg opacity-0 pointer-events-none translate-y-4 transition-all duration-300 hover:bg-[#BFFF00] hover:text-black hover:shadow-[0_0_25px_rgba(191,255,0,0.6)]">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+    <!-- ================= FLOATING NAVIGATION ================= -->
+    <header class="fixed top-4 inset-x-0 z-50 flex justify-center px-4">
+        <nav class="glass-nav rounded-full px-3 min-[360px]:px-4 sm:px-6 py-3 flex items-center justify-between gap-2 min-[360px]:gap-4 sm:gap-8 max-w-6xl w-full">
+            <!-- Brand Logo -->
+            <a href="#home" class="font-display font-black text-base min-[360px]:text-lg sm:text-2xl tracking-wide sm:tracking-wider whitespace-nowrap flex items-center gap-1.5 text-white">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#BFFF00] animate-pulse shadow-[0_0_10px_#BFFF00]"></span>
+                AJ <span class="text-[#BFFF00]">CREATIVE</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-neutral-300">
+                <a href="#home" class="hover:text-[#BFFF00] transition-colors">Home</a>
+                <a href="#showreel" class="hover:text-[#BFFF00] transition-colors">Showreels</a>
+                <a href="#latest-shorts" class="hover:text-[#BFFF00] transition-colors">Latest</a>
+                <a href="#about" class="hover:text-[#BFFF00] transition-colors">Resume</a>
+                <a href="#motion" class="hover:text-[#BFFF00] transition-colors">Skills</a>
+                <a href="#shorts" class="hover:text-[#BFFF00] transition-colors">Viral Shorts</a>
+                <a href="#longform" class="hover:text-[#BFFF00] transition-colors">Longform</a>
+                <a href="#podcasts" class="hover:text-[#BFFF00] transition-colors">Podcasts</a>
+                <a href="#events" class="hover:text-[#BFFF00] transition-colors">Events</a>
+            </div>
+
+            <!-- CTA & Mobile Menu Toggle -->
+            <div class="flex items-center gap-2 min-[360px]:gap-3">
+                <a href="#contact" class="btn-lime text-xs sm:text-sm px-3.5 sm:px-5 py-2 rounded-full tracking-wide uppercase font-mono whitespace-nowrap">
+                    Let's Talk
+                </a>
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle Menu"
+                    class="lg:hidden p-2 rounded-full border border-white/10 text-neutral-200 hover:border-[#BFFF00] hover:text-[#BFFF00] transition-colors">
+                    <svg id="menuIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Dropdown Drawer -->
+        <div id="mobileMenuDrawer"
+            class="hidden lg:hidden fixed top-20 inset-x-4 glass-nav rounded-3xl p-6 border border-[#BFFF00]/30 flex-col gap-4 text-center z-50">
+            <div class="grid grid-cols-2 gap-3 text-sm font-medium text-neutral-200">
+                <a href="#home" onclick="toggleMobileMenu()" class="py-2.5 rounded-xl bg-white/5 hover:bg-[#BFFF00]/20 hover:text-[#BFFF00]">Home</a>
+                <a href="#showreel" onclick="toggleMobileMenu()" class="py-2.5 rounded-xl bg-white/5 hover:bg-[#BFFF00]/20 hover:text-[#BFFF00]">Showreels</a>
+                <a href="#latest-shorts" onclick="toggleMobileMenu()" class="py-2.5 rounded-xl bg-white/5 hover:bg-[#BFFF00]/20 hover:text-[#BFFF00]">Latest Shorts</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="py-2.5 rounded-xl bg-white/5 hover:bg-[#BFFF00]/20 hover:text-[#BFFF00]">Resume</a>
+                <a href="#motion" onclick="toggleMobileMenu()" class="py-2.5 rounded-xl bg-white/5 hover:bg-[#BFFF00]/20 hover:text-[#BFFF00]">Skills</a>
+                <a href="#shorts" onclick="toggleMobileMenu()" class="py-2.5 rounded-xl bg-white/5 hover:bg-[#BFFF00]/20 hover:text-[#BFFF00]">Viral Shorts</a>
+                <a href="#longform" onclick="toggleMobileMenu()" class="py-2.5 rounded-xl bg-white/5 hover:bg-[#BFFF00]/20 hover:text-[#BFFF00]">Longform</a>
+                <a href="#podcasts" onclick="toggleMobileMenu()" class="py-2.5 rounded-xl bg-white/5 hover:bg-[#BFFF00]/20 hover:text-[#BFFF00]">Podcasts</a>
+                <a href="#events" onclick="toggleMobileMenu()" class="py-2.5 rounded-xl bg-white/5 hover:bg-[#BFFF00]/20 hover:text-[#BFFF00]">Events</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="home" class="relative min-h-screen pt-32 pb-20 px-4 sm:px-8 flex flex-col justify-center items-center overflow-hidden">
+        <!-- Ambient Background Motion Video Layer (Preserved Original Drive Background Preview + Subtle Blend) -->
+        <div class="absolute inset-0 pointer-events-none opacity-20 overflow-hidden flex items-center justify-center">
+            <div class="w-full h-[65vh] -skew-y-3 scale-110 overflow-hidden relative"
+                style="-webkit-mask-image: radial-gradient(circle, black 30%, transparent 80%); mask-image: radial-gradient(circle, black 30%, transparent 80%);">
+                <iframe src="https://drive.google.com/file/d/19X6GTzXUxUHhSSSG9v3o7mM_I_tkXxrO/preview"
+                    title="Background Timeline Video"
+                    class="w-[120%] h-[120%] -ml-[10%] -mt-[10%] border-0 grayscale contrast-125 mix-blend-screen pointer-events-none"
+                    allow="autoplay">
+                </iframe>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto w-full relative z-10 text-center">
+            <!-- Status Pill -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00] text-xs sm:text-sm font-mono uppercase tracking-widest mb-8">
+                <span class="w-2 h-2 rounded-full bg-[#BFFF00] animate-ping"></span>
+                Available for Freelance & Studio Projects
+            </div>
+
+            <!-- Main Kinetic Title -->
+            <h1 class="font-display font-black uppercase tracking-tight leading-[0.92] mb-6">
+                <span class="block text-2xl sm:text-4xl md:text-5xl font-mono tracking-[0.25em] stroke-lime mb-2">
+                    I AM
+                </span>
+                <span class="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl lime-gradient-text drop-shadow-[0_0_35px_rgba(191,255,0,0.2)]">
+                    ARSHPREET
+                </span>
+            </h1>
+
+            <!-- Role Tag -->
+            <div class="inline-block font-mono text-sm sm:text-lg md:text-xl tracking-[0.2em] uppercase text-[#BFFF00] font-semibold bg-white/[0.03] border border-white/10 px-6 py-2 rounded-xl mb-6">
+                Motion Graphics Artist &bull; Video Editor
+            </div>
+
+            <!-- Typewriter Quote -->
+            <p id="typewriter-quote" class="text-base sm:text-xl md:text-2xl text-neutral-300 font-light max-w-2xl mx-auto min-h-[2.2em] mb-10">
+                "Editing is not just arranging clips, it's my passion."<span class="cursor-blink"></span>
+            </p>
+
+            <!-- Hero CTAs -->
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#showreel" class="btn-lime px-7 py-4 rounded-full text-sm sm:text-base uppercase tracking-wider font-mono flex items-center gap-2.5">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    Watch New Showreels
+                </a>
+                <a href="#about" class="btn-outline-lime px-7 py-4 rounded-full text-sm sm:text-base uppercase tracking-wider font-mono">
+                    Explore Resume & Work
+                </a>
+            </div>
+
+            <!-- Quick Stats Strip -->
+            <div id="stats" class="grid grid-cols-3 gap-3 sm:gap-6 max-w-2xl mx-auto mt-16 pt-10 border-t border-white/10">
+                <div class="text-center">
+                    <span class="stat-number font-display font-black text-3xl sm:text-5xl text-[#BFFF00] block" data-target="3">3+</span>
+                    <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-neutral-400">Years Experience</span>
+                </div>
+                <div class="text-center border-x border-white/10 px-2">
+                    <span class="stat-number font-display font-black text-3xl sm:text-5xl text-[#BFFF00] block" data-target="50">50+</span>
+                    <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-neutral-400">Projects Delivered</span>
+                </div>
+                <div class="text-center">
+                    <span class="stat-number font-display font-black text-3xl sm:text-5xl text-[#BFFF00] block" data-target="20">20+</span>
+                    <span class="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-neutral-400">Happy Clients</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= KINETIC MARQUEE RIBBON ================= -->
+    <div class="py-4 bg-[#BFFF00] text-black font-mono font-bold uppercase tracking-widest text-xs sm:text-sm overflow-hidden border-y border-black/20">
+        <div class="marquee-track flex items-center gap-10">
+            <span>⚡ KINETIC TYPOGRAPHY</span>
+            <span>✦ 3D MOTION DESIGN</span>
+            <span>⚡ HIGH-RETENTION SHORTS</span>
+            <span>✦ VFX & COMPOSITING</span>
+            <span>⚡ PODCAST PRODUCTION</span>
+            <span>✦ COLOR GRADING</span>
+            <span>⚡ KINETIC TYPOGRAPHY</span>
+            <span>✦ 3D MOTION DESIGN</span>
+            <span>⚡ HIGH-RETENTION SHORTS</span>
+            <span>✦ VFX & COMPOSITING</span>
+            <span>⚡ PODCAST PRODUCTION</span>
+            <span>✦ COLOR GRADING</span>
+        </div>
+    </div>
+
+    <!-- ================= SHOWREEL STUDIO (ALL NEW + LEGACY REELS) ================= -->
+    <section id="showreel" class="py-24 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal-item">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-[0.25em] text-[#BFFF00] block mb-2">// FEATURED REELS</span>
+                <h2 class="font-display font-black text-4xl sm:text-5xl text-white tracking-tight">
+                    Showreel <span class="text-[#BFFF00]">Studio</span>
+                </h2>
+            </div>
+            <p class="text-neutral-400 max-w-md text-sm sm:text-base">
+                Switch between my latest Main Showreel, dedicated Desktop (16:9) Motion Graphics Reel, and Mobile/Vertical (9:16) Motion Reel.
+            </p>
+        </div>
+
+        <!-- Interactive Reel Switcher Tabs -->
+        <div class="flex flex-wrap items-center gap-3 mb-8 reveal-item">
+            <button onclick="switchShowreel('main')" id="tab-reel-main"
+                class="reel-tab active-reel-tab px-5 py-3 rounded-2xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all bg-[#BFFF00] text-black shadow-[0_0_20px_rgba(191,255,0,0.35)] flex items-center gap-2">
+                <span>🎬</span> New Main Showreel
+            </button>
+            <button onclick="switchShowreel('desktop')" id="tab-reel-desktop"
+                class="reel-tab px-5 py-3 rounded-2xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-[#BFFF00]/50 flex items-center gap-2">
+                <span>🖥️</span> Motion Showreel (Desktop)
+            </button>
+            <button onclick="switchShowreel('mobile')" id="tab-reel-mobile"
+                class="reel-tab px-5 py-3 rounded-2xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-[#BFFF00]/50 flex items-center gap-2">
+                <span>📱</span> Motion Showreel (Mobile / Vertical)
+            </button>
+            <button onclick="switchShowreel('legacy')" id="tab-reel-legacy"
+                class="reel-tab px-5 py-3 rounded-2xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-[#BFFF00]/50 flex items-center gap-2">
+                <span>🎞️</span> Classic Showreel Archive
+            </button>
+        </div>
+
+        <!-- Main Showcase Stage (With Custom Thumbnail Cover 1dT1tkIvtsck-M5DkQvTSwYAbRv1V-w-I) -->
+        <div class="glass-card rounded-3xl p-3 sm:p-5 border border-[#BFFF00]/30 shadow-[0_0_50px_rgba(191,255,0,0.08)] reveal-item">
+            <!-- Dynamic Player Wrapper -->
+            <div id="showreel-container" onclick="playInlineReel('main')"
+                class="group relative w-full overflow-hidden rounded-2xl bg-black aspect-video max-h-[75vh] mx-auto transition-all duration-500">
+                <!-- Thumbnail Cover Overlay -->
+                <img referrerpolicy="no-referrer" id="main-reel-thumb"
+                    src="https://lh3.googleusercontent.com/d/1dT1tkIvtsck-M5DkQvTSwYAbRv1V-w-I=w1920"
+                    onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://drive.google.com/thumbnail?id=1dT1tkIvtsck-M5DkQvTSwYAbRv1V-w-I&sz=w1920'}"
+                    alt="Main Showreel Thumbnail"
+                    class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                <!-- Subtle transparent gradient so thumbnail stays crystal clear -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none"></div>
+                <!-- Compact Semi-Transparent Glass Lime Play Button -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/35 backdrop-blur-md border border-[#BFFF00]/75 text-[#BFFF00] flex items-center justify-center shadow-[0_0_20px_rgba(191,255,0,0.3)] group-hover:bg-[#BFFF00]/25 group-hover:scale-110 transition duration-300">
+                        <svg viewBox="0 0 24 24" class="w-6 h-6 sm:w-7 sm:h-7 fill-current ml-0.5">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reel Footer Bar with Direct Links (No portfolio links removed!) -->
+            <div class="mt-4 pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
+                <div>
+                    <h3 id="active-reel-title" class="font-display font-bold text-lg sm:text-xl text-white">
+                        New Main Showreel — Creative Motion & Editing
+                    </h3>
+                    <p id="active-reel-desc" class="text-xs sm:text-sm text-neutral-400">
+                        High-impact compilation of kinetic typography, visual effects, and dynamic cuts.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2.5">
+                    <button onclick="playInlineReel('main')"
+                        class="px-4 py-2 rounded-xl bg-[#BFFF00] text-black font-mono text-xs font-bold uppercase hover:bg-[#d2ff4d] transition">
+                        ▶ Play Inline
+                    </button>
+                    <a id="active-reel-direct-link"
+                        href="https://drive.google.com/file/d/1Pz78VmHjDp47EphWU36Pc2HCS_gLqNZK/view?usp=sharing"
+                        target="_blank" rel="noopener noreferrer"
+                        class="btn-outline-lime px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider flex items-center gap-1.5">
+                        <span>Open in Drive</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= DEVICE-ADAPTIVE MOTION GRAPHICS SHOWREEL (DIRECTLY BELOW MAIN SHOWREEL) ================= -->
+        <div class="mt-12 reveal-item">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#BFFF00]/15 border border-[#BFFF00]/30 text-[#BFFF00] font-mono text-xs font-bold uppercase mb-2">
+                        <span class="w-2 h-2 rounded-full bg-[#BFFF00] animate-ping"></span>
+                        <span class="hidden md:inline">Auto-Detected: Desktop Widescreen (16:9) Reel</span>
+                        <span class="inline md:hidden">Auto-Detected: Mobile Vertical (9:16) Reel</span>
+                    </div>
+                    <h3 class="font-display font-black text-2xl sm:text-4xl text-white">
+                        Motion Graphics <span class="text-[#BFFF00]">Showreel</span>
+                    </h3>
+                </div>
+                <p class="text-xs sm:text-sm text-neutral-400 font-mono">
+                    Automatically optimized for your screen size
+                </p>
+            </div>
+
+            <!-- DESKTOP MOTION GRAPHICS SHOWREEL (Automatically shown on Desktop/Laptop screens >= 768px) -->
+            <div id="motion-reel-desktop-view" class="hidden md:block glass-card rounded-3xl p-4 sm:p-5 border border-[#BFFF00]/30 shadow-[0_0_45px_rgba(191,255,0,0.08)]">
+                <div id="desktop-motion-stage" onclick="playInlineReel('desktop-stage')"
+                    class="group relative w-full overflow-hidden rounded-2xl bg-black aspect-video max-h-[72vh] mx-auto">
+                    <img referrerpolicy="no-referrer" src="https://lh3.googleusercontent.com/d/18tVKQfok8dax7b85E1duWlUfj73XMPqq=w1920"
+                        onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://drive.google.com/thumbnail?id=18tVKQfok8dax7b85E1duWlUfj73XMPqq&sz=w1920'}"
+                        alt="Desktop Motion Graphics Showreel Thumbnail"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/35 backdrop-blur-md border border-[#BFFF00]/75 text-[#BFFF00] flex items-center justify-center shadow-[0_0_20px_rgba(191,255,0,0.3)] group-hover:bg-[#BFFF00]/25 group-hover:scale-110 transition duration-300">
+                            <svg viewBox="0 0 24 24" class="w-6 h-6 sm:w-7 sm:h-7 fill-current ml-0.5">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between gap-4 px-2">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="px-2.5 py-0.5 rounded bg-[#BFFF00] text-black font-mono text-[11px] font-bold uppercase">DESKTOP 16:9</span>
+                            <h4 class="font-display font-bold text-lg text-white">Motion Graphics Showreel (Desktop Edition)</h4>
+                        </div>
+                        <p class="text-xs text-neutral-400">Widescreen horizontal motion graphics showreel tailored for desktop monitors.</p>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <button onclick="playInlineReel('desktop-stage')"
+                            class="px-4 py-2 rounded-xl bg-[#BFFF00] text-black font-mono text-xs font-bold uppercase hover:bg-[#d2ff4d] transition">
+                            ▶ Play Inline
+                        </button>
+                        <button onclick="openDriveModal('1BuuEnoeOG37S9UjjgejxotcjCJRi6dtG', '16/9')"
+                            class="btn-outline-lime px-4 py-2 rounded-xl text-xs font-mono uppercase">
+                            ▶ Play Modal
+                        </button>
+                        <a href="https://drive.google.com/file/d/1BuuEnoeOG37S9UjjgejxotcjCJRi6dtG/view?usp=sharing"
+                            target="_blank" rel="noopener noreferrer"
+                            class="btn-outline-lime px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider">
+                            Drive ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOBILE MOTION GRAPHICS SHOWREEL (Automatically shown on Phone/Mobile screens < 768px) -->
+            <div id="motion-reel-mobile-view" class="block md:hidden glass-card rounded-3xl p-3 border border-[#BFFF00]/30 shadow-[0_0_45px_rgba(191,255,0,0.08)]">
+                <div id="mobile-motion-stage" onclick="playInlineReel('mobile-stage')"
+                    class="group relative w-full max-w-[340px] overflow-hidden rounded-2xl bg-black aspect-[9/16] mx-auto">
+                    <img referrerpolicy="no-referrer" src="https://lh3.googleusercontent.com/d/14Cq2hCW_vIX2sO8C0qJ0jKkGlFPJOMZm=w1000"
+                        onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://drive.google.com/thumbnail?id=14Cq2hCW_vIX2sO8C0qJ0jKkGlFPJOMZm&sz=w1000'}"
+                        alt="Mobile Motion Graphics Showreel Thumbnail"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="w-11 h-11 rounded-full bg-black/35 backdrop-blur-md border border-[#BFFF00]/75 text-[#BFFF00] flex items-center justify-center shadow-[0_0_18px_rgba(191,255,0,0.3)] group-hover:bg-[#BFFF00]/25 group-hover:scale-110 transition duration-300">
+                            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current ml-0.5">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 flex flex-col gap-3 px-1">
+                    <div>
+                        <span class="inline-block px-2.5 py-0.5 rounded bg-[#BFFF00] text-black font-mono text-[10px] font-bold uppercase mb-1">MOBILE 9:16</span>
+                        <h4 class="font-display font-bold text-base text-white">Motion Graphics Showreel (Mobile Edition)</h4>
+                        <p class="text-xs text-neutral-400">Vertical high-retention motion graphics showreel crafted for mobile screens.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="playInlineReel('mobile-stage')"
+                            class="flex-1 py-2 rounded-xl bg-[#BFFF00] text-black font-mono text-xs font-bold uppercase hover:bg-[#d2ff4d] transition">
+                            ▶ Play Inline
+                        </button>
+                        <button onclick="openDriveModal('1PDHFyq2hJsXwwp1T5UEpQME1_91ukQ4H', '9/16')"
+                            class="btn-outline-lime px-3 py-2 rounded-xl text-xs font-mono uppercase">
+                            ▶ Play Modal
+                        </button>
+                        <a href="https://drive.google.com/file/d/1PDHFyq2hJsXwwp1T5UEpQME1_91ukQ4H/view?usp=sharing"
+                            target="_blank" rel="noopener noreferrer"
+                            class="btn-outline-lime px-3.5 py-2 rounded-xl text-xs font-mono uppercase">
+                            Drive ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Direct Links Strip (Preserves all showreel links & modal triggers on any device) -->
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-white/[0.02] border border-white/10 text-xs font-mono text-neutral-400">
+                <span>All Showreel Direct Links:</span>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button onclick="openDriveModal('1Pz78VmHjDp47EphWU36Pc2HCS_gLqNZK', '16/9')" class="hover:text-[#BFFF00] underline">▶ Main Showreel</button>
+                    <a href="https://drive.google.com/file/d/1Pz78VmHjDp47EphWU36Pc2HCS_gLqNZK/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-[#BFFF00]">[Drive ↗]</a>
+                    <span>•</span>
+                    <button onclick="openDriveModal('1BuuEnoeOG37S9UjjgejxotcjCJRi6dtG', '16/9')" class="hover:text-[#BFFF00] underline">▶ Desktop Motion Reel</button>
+                    <a href="https://drive.google.com/file/d/1BuuEnoeOG37S9UjjgejxotcjCJRi6dtG/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-[#BFFF00]">[Drive ↗]</a>
+                    <span>•</span>
+                    <button onclick="openDriveModal('1PDHFyq2hJsXwwp1T5UEpQME1_91ukQ4H', '9/16')" class="hover:text-[#BFFF00] underline">▶ Mobile Motion Reel</button>
+                    <a href="https://drive.google.com/file/d/1PDHFyq2hJsXwwp1T5UEpQME1_91ukQ4H/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-[#BFFF00]">[Drive ↗]</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= LATEST WORK: SHORT VIDEOS (GOOGLE DRIVE) ================= -->
+    <section id="latest-shorts" class="py-12 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4 reveal-item">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-[0.25em] text-[#BFFF00] block mb-2">// NEW &amp; LATEST WORK</span>
+                <h2 class="font-display font-black text-4xl sm:text-5xl text-white">
+                    Short <span class="text-[#BFFF00]">Videos</span>
+                </h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="scrollLatestShorts(-255)" aria-label="Scroll Left"
+                    class="w-11 h-11 rounded-full glass-card flex items-center justify-center text-white hover:border-[#BFFF00] hover:text-[#BFFF00] transition">
+                    ←
+                </button>
+                <button onclick="scrollLatestShorts(255)" aria-label="Scroll Right"
+                    class="w-11 h-11 rounded-full glass-card flex items-center justify-center text-white hover:border-[#BFFF00] hover:text-[#BFFF00] transition">
+                    →
+                </button>
+            </div>
+        </div>
+
+        <div class="shorts-track reveal-item" id="latest-shorts-track">
+            <!-- Latest 1: 11NEPp-hHsFY-hZi-pl5ZWXbmB9LBzh1E -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openDriveModal('11NEPp-hHsFY-hZi-pl5ZWXbmB9LBzh1E', '9/16')">
+                <img referrerpolicy="no-referrer" loading="lazy" src="assets/latest/short-1.jpg"
+                    onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://drive.google.com/thumbnail?id=11NEPp-hHsFY-hZi-pl5ZWXbmB9LBzh1E&sz=w600'}" alt="Brand Reel"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-[#BFFF00] text-black font-mono text-[11px] font-bold">
+                    NEW
+                </div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Vantage Studioz</span>
+                    <h3 class="font-display font-bold text-xl text-white">Brand Reel</h3>
+                </div>
+            </div>
+
+            <!-- Latest 2: 1kZ-nqrLJsn63Ac576QTPvbBQfpP2Zeez -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openDriveModal('1kZ-nqrLJsn63Ac576QTPvbBQfpP2Zeez', '9/16')">
+                <img referrerpolicy="no-referrer" loading="lazy" src="assets/latest/short-2.jpg"
+                    onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://drive.google.com/thumbnail?id=1kZ-nqrLJsn63Ac576QTPvbBQfpP2Zeez&sz=w600'}" alt="Short Edit 02"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-[#BFFF00] text-black font-mono text-[11px] font-bold">
+                    NEW
+                </div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Fresh Drop</span>
+                    <h3 class="font-display font-bold text-xl text-white">Short Edit 02</h3>
+                </div>
+            </div>
+
+            <!-- Latest 3: 1hgYtwpF-hlPOrILU4iOjKTt8EgvKwwBJ -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openDriveModal('1hgYtwpF-hlPOrILU4iOjKTt8EgvKwwBJ', '9/16')">
+                <img referrerpolicy="no-referrer" loading="lazy" src="assets/latest/short-3.jpg"
+                    onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://drive.google.com/thumbnail?id=1hgYtwpF-hlPOrILU4iOjKTt8EgvKwwBJ&sz=w600'}" alt="New Car Reel"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-[#BFFF00] text-black font-mono text-[11px] font-bold">
+                    NEW
+                </div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">AJ Creative</span>
+                    <h3 class="font-display font-bold text-xl text-white">New Car Reel</h3>
+                </div>
+            </div>
+
+            <!-- Latest 4: 1Eu5kBcSz11uSJWpXnPw4fRXRMQNVS2uw -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openDriveModal('1Eu5kBcSz11uSJWpXnPw4fRXRMQNVS2uw', '9/16')">
+                <img referrerpolicy="no-referrer" loading="lazy" src="assets/latest/short-4.jpg"
+                    onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://drive.google.com/thumbnail?id=1Eu5kBcSz11uSJWpXnPw4fRXRMQNVS2uw&sz=w600'}" alt="Short Edit 04"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-[#BFFF00] text-black font-mono text-[11px] font-bold">
+                    NEW
+                </div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Fresh Drop</span>
+                    <h3 class="font-display font-bold text-xl text-white">Short Edit 04</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT, NEW PROFILE PHOTO & RESUME ================= -->
+    <section id="about" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="glass-card rounded-3xl p-6 sm:p-12 border border-white/10 relative overflow-hidden">
+            <!-- Decorative Corner Accent -->
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#BFFF00]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Top Profile Header -->
+            <div class="flex flex-col md:flex-row items-center gap-8 sm:gap-12 pb-12 border-b border-white/10 reveal-item">
+                <!-- New Profile Photo with Lime Neon Frame -->
+                <div class="relative group shrink-0">
+                    <div class="absolute -inset-1.5 rounded-3xl bg-gradient-to-tr from-[#BFFF00] to-[#4d7c0f] opacity-60 blur group-hover:opacity-100 transition duration-500"></div>
+                    <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-3xl overflow-hidden border-2 border-[#BFFF00]/60 bg-charcoal shadow-2xl">
+                        <img referrerpolicy="no-referrer" src="https://drive.google.com/thumbnail?id=1NxYF22dTr4ZVT-1c1_AUZSS3CPUWD_XY&sz=w1000"
+                            onerror="this.src='https://lh3.googleusercontent.com/d/1NxYF22dTr4ZVT-1c1_AUZSS3CPUWD_XY=w1000'"
+                            alt="Arshpreet Singh Profile"
+                            class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+                    </div>
+                    <a href="https://drive.google.com/file/d/1NxYF22dTr4ZVT-1c1_AUZSS3CPUWD_XY/view?usp=sharing"
+                        target="_blank" rel="noopener noreferrer"
+                        title="View Full Profile Photo"
+                        class="absolute -bottom-3 -right-3 bg-[#BFFF00] text-black text-[11px] font-mono font-bold px-3 py-1 rounded-full shadow-lg hover:scale-105 transition">
+                        HD Photo ↗
+                    </a>
+                </div>
+
+                <!-- Bio & Intro -->
+                <div class="text-center md:text-left">
+                    <span class="font-mono text-xs uppercase tracking-[0.25em] text-[#BFFF00] block mb-2">// ABOUT & EXPERIENCE</span>
+                    <h2 class="font-display font-black text-3xl sm:text-5xl text-white mb-4">
+                        Arshpreet Singh
+                    </h2>
+                    <p class="text-neutral-300 text-base sm:text-lg leading-relaxed max-w-2xl mb-6">
+                        Passionate about creating visual experiences that leave a mark. My journey involves mastering the art of motion, color, and storytelling—transforming raw footage and static concepts into high-retention visual narratives.
+                    </p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                        <span class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-neutral-300">📍 9-Phase, Mohali</span>
+                        <span class="px-3.5 py-1.5 rounded-full bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-xs font-mono text-[#BFFF00]">⚡ Motion Graphic Artist</span>
+                        <span class="px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-neutral-300">🎬 Short & Longform Editor</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience & Education Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 py-12 border-b border-white/10">
+                <!-- Left Column: Experience -->
+                <div class="reveal-item">
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="w-8 h-8 rounded-lg bg-[#BFFF00]/15 border border-[#BFFF00]/40 text-[#BFFF00] flex items-center justify-center font-mono font-bold">01</span>
+                        <h3 class="font-display font-bold text-2xl text-white">Work Experience</h3>
+                    </div>
+
+                    <div class="space-y-8 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-gradient-to-b before:from-[#BFFF00] before:to-white/10">
+                        <!-- Exp 1 -->
+                        <div class="relative pl-10">
+                            <span class="absolute left-1.5 top-1.5 w-3.5 h-3.5 rounded-full bg-[#BFFF00] shadow-[0_0_12px_#BFFF00]"></span>
+                            <span class="inline-block px-3 py-0.5 rounded-full bg-[#BFFF00]/15 text-[#BFFF00] font-mono text-xs font-semibold mb-2">
+                                July 2025 - Present
+                            </span>
+                            <h4 class="font-display font-bold text-xl text-white">Motion Graphic Artist & Short Form Editor</h4>
+                            <div class="text-sm font-mono text-neutral-400 mb-2">Grow U Media</div>
+                            <p class="text-sm text-neutral-300 leading-relaxed">
+                                Specialized in creating dynamic motion graphics and editing viral short-form content to boost audience retention and brand engagement.
+                            </p>
+                        </div>
+
+                        <!-- Exp 2 -->
+                        <div class="relative pl-10">
+                            <span class="absolute left-1.5 top-1.5 w-3.5 h-3.5 rounded-full bg-charcoal border-2 border-[#BFFF00]"></span>
+                            <span class="inline-block px-3 py-0.5 rounded-full bg-white/10 text-neutral-300 font-mono text-xs font-semibold mb-2">
+                                2023 - 2024
+                            </span>
+                            <h4 class="font-display font-bold text-xl text-white">Freelance Video Editor</h4>
+                            <div class="text-sm font-mono text-neutral-400 mb-2">Impactive IT Solutions</div>
+                            <p class="text-sm text-neutral-300 leading-relaxed">
+                                Professional video editing, motion graphics, and post-production. Collaborated on digital content creation and visual storytelling.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Education -->
+                <div class="reveal-item">
+                    <div class="flex items-center gap-3 mb-8">
+                        <span class="w-8 h-8 rounded-lg bg-[#BFFF00]/15 border border-[#BFFF00]/40 text-[#BFFF00] flex items-center justify-center font-mono font-bold">02</span>
+                        <h3 class="font-display font-bold text-2xl text-white">Education</h3>
+                    </div>
+
+                    <div class="space-y-6 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-gradient-to-b before:from-[#BFFF00] before:to-white/10">
+                        <!-- Edu 1 -->
+                        <div class="relative pl-10">
+                            <span class="absolute left-1.5 top-1.5 w-3.5 h-3.5 rounded-full bg-[#BFFF00] shadow-[0_0_12px_#BFFF00]"></span>
+                            <span class="inline-block px-3 py-0.5 rounded-full bg-[#BFFF00]/15 text-[#BFFF00] font-mono text-xs font-semibold mb-1.5">
+                                2022 - 2025
+                            </span>
+                            <h4 class="font-display font-bold text-lg text-white">B.Sc Animation, VFX & Gaming</h4>
+                            <div class="text-sm text-neutral-400">Chandigarh University</div>
+                        </div>
+
+                        <!-- Edu 2 -->
+                        <div class="relative pl-10">
+                            <span class="absolute left-1.5 top-1.5 w-3.5 h-3.5 rounded-full bg-charcoal border-2 border-[#BFFF00]"></span>
+                            <span class="inline-block px-3 py-0.5 rounded-full bg-white/10 text-neutral-300 font-mono text-xs font-semibold mb-1.5">
+                                2021
+                            </span>
+                            <h4 class="font-display font-bold text-lg text-white">XIIth Grade</h4>
+                            <div class="text-sm text-neutral-400">PSEB, Moga</div>
+                        </div>
+
+                        <!-- Edu 3 -->
+                        <div class="relative pl-10">
+                            <span class="absolute left-1.5 top-1.5 w-3.5 h-3.5 rounded-full bg-charcoal border-2 border-[#BFFF00]"></span>
+                            <span class="inline-block px-3 py-0.5 rounded-full bg-white/10 text-neutral-300 font-mono text-xs font-semibold mb-1.5">
+                                2019
+                            </span>
+                            <h4 class="font-display font-bold text-lg text-white">Xth (Multimedia Focus)</h4>
+                            <div class="text-sm text-neutral-400">Learn all about Multimedia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Software Toolkit -->
+            <div class="pt-10 reveal-item">
+                <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#BFFF00] block mb-4">// PRODUCTION PIPELINE</span>
+                <h3 class="font-display font-bold text-2xl text-white mb-6">Software Toolkit</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <div class="sw-icon p-4 rounded-2xl bg-[#00005b]/40 border border-[#dcb6fa]/30 hover:border-[#BFFF00] flex items-center gap-3.5 transition group">
+                        <div class="w-12 h-12 rounded-xl bg-[#00005b] text-[#dcb6fa] font-display font-black text-xl flex items-center justify-center border border-[#dcb6fa]/40 group-hover:scale-110 transition">Ae</div>
+                        <div>
+                            <div class="font-bold text-sm text-white">After Effects</div>
+                            <div class="text-xs text-neutral-400 font-mono">Motion & VFX</div>
+                        </div>
+                    </div>
+
+                    <div class="sw-icon p-4 rounded-2xl bg-[#330066]/40 border border-[#eebbfa]/30 hover:border-[#BFFF00] flex items-center gap-3.5 transition group">
+                        <div class="w-12 h-12 rounded-xl bg-[#330066] text-[#eebbfa] font-display font-black text-xl flex items-center justify-center border border-[#eebbfa]/40 group-hover:scale-110 transition">Pr</div>
+                        <div>
+                            <div class="font-bold text-sm text-white">Premiere Pro</div>
+                            <div class="text-xs text-neutral-400 font-mono">Editing & Cuts</div>
+                        </div>
+                    </div>
+
+                    <div class="sw-icon p-4 rounded-2xl bg-[#001e36]/50 border border-[#31a8ff]/30 hover:border-[#BFFF00] flex items-center gap-3.5 transition group">
+                        <div class="w-12 h-12 rounded-xl bg-[#001e36] text-[#31a8ff] font-display font-black text-xl flex items-center justify-center border border-[#31a8ff]/40 group-hover:scale-110 transition">Ps</div>
+                        <div>
+                            <div class="font-bold text-sm text-white">Photoshop</div>
+                            <div class="text-xs text-neutral-400 font-mono">Design & Assets</div>
+                        </div>
+                    </div>
+
+                    <div class="sw-icon p-4 rounded-2xl bg-[#330000]/50 border border-[#ff9a00]/30 hover:border-[#BFFF00] flex items-center gap-3.5 transition group">
+                        <div class="w-12 h-12 rounded-xl bg-[#330000] text-[#ff9a00] font-display font-black text-xl flex items-center justify-center border border-[#ff9a00]/40 group-hover:scale-110 transition">Ai</div>
+                        <div>
+                            <div class="font-bold text-sm text-white">Illustrator</div>
+                            <div class="text-xs text-neutral-400 font-mono">Vector Art</div>
+                        </div>
+                    </div>
+
+                    <div class="sw-icon p-4 rounded-2xl bg-white/5 border border-white/15 hover:border-[#BFFF00] flex items-center gap-3.5 transition group col-span-2 sm:col-span-1">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FF5E62] via-[#FF9966] to-[#BFFF00] text-black font-display font-black text-lg flex items-center justify-center group-hover:scale-110 transition">Dav</div>
+                        <div>
+                            <div class="font-bold text-sm text-white">DaVinci</div>
+                            <div class="text-xs text-neutral-400 font-mono">Color Grading</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CORE MOTION SKILLS BENTO ================= -->
+    <section id="motion" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="mb-12 reveal-item">
+            <span class="font-mono text-xs uppercase tracking-[0.25em] text-[#BFFF00] block mb-2">// WHAT I CRAFT</span>
+            <h2 class="font-display font-black text-4xl sm:text-5xl text-white">
+                Core <span class="text-[#BFFF00]">Specialties</span>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="motion-card glass-card rounded-3xl p-7 relative overflow-hidden group reveal-item">
+                <div class="w-14 h-14 rounded-2xl bg-[#BFFF00]/15 border border-[#BFFF00]/30 flex items-center justify-center text-2xl mb-6 group-hover:bg-[#BFFF00] group-hover:text-black transition">
+                    🔠
+                </div>
+                <h3 class="font-display font-bold text-2xl text-white mb-2">Kinetic Type</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed">
+                    High-energy text animations that retain viewer attention and convey messages instantly.
+                </p>
+            </div>
+
+            <div class="motion-card glass-card rounded-3xl p-7 relative overflow-hidden group reveal-item">
+                <div class="w-14 h-14 rounded-2xl bg-[#BFFF00]/15 border border-[#BFFF00]/30 flex items-center justify-center text-2xl mb-6 group-hover:bg-[#BFFF00] group-hover:text-black transition">
+                    🧊
+                </div>
+                <h3 class="font-display font-bold text-2xl text-white mb-2">3D Composition</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed">
+                    Using After Effects 3D space and Element 3D for depth and realistic product motion.
+                </p>
+            </div>
+
+            <div class="motion-card glass-card rounded-3xl p-7 relative overflow-hidden group reveal-item">
+                <div class="w-14 h-14 rounded-2xl bg-[#BFFF00]/15 border border-[#BFFF00]/30 flex items-center justify-center text-2xl mb-6 group-hover:bg-[#BFFF00] group-hover:text-black transition">
+                    ✨
+                </div>
+                <h3 class="font-display font-bold text-2xl text-white mb-2">VFX & Cleanup</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed">
+                    Rotoscoping, object removal, and seamless integration of CGI into live footage.
+                </p>
+            </div>
+
+            <div class="motion-card glass-card rounded-3xl p-7 relative overflow-hidden group reveal-item">
+                <div class="w-14 h-14 rounded-2xl bg-[#BFFF00]/15 border border-[#BFFF00]/30 flex items-center justify-center text-2xl mb-6 group-hover:bg-[#BFFF00] group-hover:text-black transition">
+                    ⚡
+                </div>
+                <h3 class="font-display font-bold text-2xl text-white mb-2">Logo Animation</h3>
+                <p class="text-sm text-neutral-400 leading-relaxed">
+                    Breathing life into static brands with fluid, character-filled motion reveals.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= VIRAL SHORTS (8 YOUTUBE SHORTS PRESERVED) ================= -->
+    <section id="shorts" class="py-12 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4 reveal-item">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-[0.25em] text-[#BFFF00] block mb-2">// 9:16 VERTICAL FORMAT</span>
+                <h2 class="font-display font-black text-4xl sm:text-5xl text-white">
+                    Viral <span class="text-[#BFFF00]">Shorts</span>
+                </h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="scrollShorts(-255)" aria-label="Scroll Left"
+                    class="w-11 h-11 rounded-full glass-card flex items-center justify-center text-white hover:border-[#BFFF00] hover:text-[#BFFF00] transition">
+                    ←
+                </button>
+                <button onclick="scrollShorts(255)" aria-label="Scroll Right"
+                    class="w-11 h-11 rounded-full glass-card flex items-center justify-center text-white hover:border-[#BFFF00] hover:text-[#BFFF00] transition">
+                    →
+                </button>
+            </div>
+        </div>
+
+        <div class="shorts-track reveal-item" id="shorts-slider-track">
+            <!-- Short 1: 5dVW9EbFdMo -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openVideoModal('5dVW9EbFdMo', '9/16')">
+                <img src="https://i.ytimg.com/vi/5dVW9EbFdMo/hq720.jpg" alt="Retention Edit"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Engaging Hook</span>
+                    <h3 class="font-display font-bold text-xl text-white">Retention Edit</h3>
+                </div>
+            </div>
+
+            <!-- Short 2: bN0WGYq9pt8 -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openVideoModal('bN0WGYq9pt8', '9/16')">
+                <img src="https://i.ytimg.com/vi/bN0WGYq9pt8/hq720.jpg" alt="VFX Breakdown"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Behind the Scenes</span>
+                    <h3 class="font-display font-bold text-xl text-white">VFX Breakdown</h3>
+                </div>
+            </div>
+
+            <!-- Short 3: mhIbGAwptSI -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openVideoModal('mhIbGAwptSI', '9/16')">
+                <img src="https://i.ytimg.com/vi/mhIbGAwptSI/hq720.jpg" alt="Smooth Transitions"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Seamless Flow</span>
+                    <h3 class="font-display font-bold text-xl text-white">Smooth Transitions</h3>
+                </div>
+            </div>
+
+            <!-- Short 4: As8R4lR7ON8 -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openVideoModal('As8R4lR7ON8', '9/16')">
+                <img src="https://i.ytimg.com/vi/As8R4lR7ON8/hq720.jpg" alt="Color Grading"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Cinematic Look</span>
+                    <h3 class="font-display font-bold text-xl text-white">Color Grading</h3>
+                </div>
+            </div>
+
+            <!-- Short 5: g33OgG8Vh2Q -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openVideoModal('g33OgG8Vh2Q', '9/16')">
+                <img src="https://i.ytimg.com/vi/g33OgG8Vh2Q/hq720.jpg" alt="Viral Hook"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Trend Alert</span>
+                    <h3 class="font-display font-bold text-xl text-white">Viral Hook</h3>
+                </div>
+            </div>
+
+            <!-- Short 6: W_p1yR2npMI -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openVideoModal('W_p1yR2npMI', '9/16')">
+                <img src="https://i.ytimg.com/vi/W_p1yR2npMI/hq720.jpg" alt="Sound Design"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Immersive Audio</span>
+                    <h3 class="font-display font-bold text-xl text-white">Sound Design</h3>
+                </div>
+            </div>
+
+            <!-- Short 7: nXv8u_JXFFw -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openVideoModal('nXv8u_JXFFw', '9/16')">
+                <img src="https://i.ytimg.com/vi/nXv8u_JXFFw/hq720.jpg" alt="3D Motion"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Blender & AE</span>
+                    <h3 class="font-display font-bold text-xl text-white">3D Motion</h3>
+                </div>
+            </div>
+
+            <!-- Short 8: ur3VdPPvCuE -->
+            <div class="short-item group relative rounded-2xl overflow-hidden glass-card shrink-0"
+                onclick="openVideoModal('ur3VdPPvCuE', '9/16')">
+                <img src="https://i.ytimg.com/vi/ur3VdPPvCuE/hq720.jpg" alt="Loop Animation"
+                    class="w-full h-full object-cover group-hover:scale-110 group-hover:opacity-60 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute top-4 right-4 px-2.5 py-1 rounded-full bg-black/70 border border-[#BFFF00]/40 text-[#BFFF00] font-mono text-[11px]">
+                    9:16 SHORT
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                    <div class="w-16 h-16 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-2xl shadow-[0_0_25px_#BFFF00]">▶</div>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-5">
+                    <span class="text-xs font-mono uppercase tracking-wider text-[#BFFF00] block mb-1">Perfect Loop</span>
+                    <h3 class="font-display font-bold text-xl text-white">Loop Animation</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PORTFOLIO ARCHIVE: LONGFORM, PODCASTS & EVENTS ================= -->
+    <section class="py-20 px-4 sm:px-8 max-w-7xl mx-auto space-y-12">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 reveal-item">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-[0.25em] text-[#BFFF00] block mb-2">// CATEGORIZED VAULT</span>
+                <h2 class="font-display font-black text-4xl sm:text-5xl text-white">
+                    Project <span class="text-[#BFFF00]">Folders</span>
+                </h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="expandAllFolders(true)" class="btn-outline-lime px-4 py-2 rounded-xl text-xs font-mono uppercase">
+                    Expand All
+                </button>
+                <button onclick="expandAllFolders(false)" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono uppercase text-neutral-300 border border-white/10">
+                    Collapse All
+                </button>
+            </div>
+        </div>
+
+        <!-- 1. LONGFORM EDITS (6 PROJECTS) -->
+        <div id="longform" class="reveal-item">
+            <div onclick="toggleFolder('longform-grid', this)"
+                class="folder-tab glass-card rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-4 border-l-[#BFFF00] hover:bg-[#BFFF00]/[0.04] transition">
+                <div class="flex items-center gap-5">
+                    <div class="w-16 h-16 rounded-2xl bg-[#BFFF00]/15 border border-[#BFFF00]/40 flex items-center justify-center text-3xl folder-icon">
+                        📂
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h3 class="font-display font-black text-2xl sm:text-3xl text-white">Longform Edits</h3>
+                            <span class="px-3 py-0.5 rounded-full bg-[#BFFF00] text-black font-mono text-xs font-bold">6 PROJECTS</span>
+                        </div>
+                        <p class="text-sm text-neutral-400 mt-1">High-energy montages, gaming highlights, VFX compositions, storytelling & commercial promos.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 text-[#BFFF00] font-mono text-xs uppercase tracking-wider self-end sm:self-center">
+                    <span class="folder-status-label">Click to Toggle</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Longform Grid (Opened by default for instant discoverability) -->
+            <div id="longform-grid" class="folder-content open grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Video 1: DnjZImokSDg -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('DnjZImokSDg', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/DnjZImokSDg/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/DnjZImokSDg/hqdefault.jpg'"
+                            alt="High Energy Montage"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl shadow-lg">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">High Energy Montage</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Pacing</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Sync</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 2: HpmL44pYZSg -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('HpmL44pYZSg', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/HpmL44pYZSg/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/HpmL44pYZSg/hqdefault.jpg'"
+                            alt="Gaming Highlights"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl shadow-lg">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Gaming Highlights</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Dynamic</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Stream</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 3: 0mAmdpcGAIg -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('0mAmdpcGAIg', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/0mAmdpcGAIg/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/0mAmdpcGAIg/hqdefault.jpg'"
+                            alt="VFX Composition"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl shadow-lg">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">VFX Composition</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">After Effects</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Compositing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 4: wr1l2MfrCQE -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('wr1l2MfrCQE', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/wr1l2MfrCQE/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/wr1l2MfrCQE/hqdefault.jpg'"
+                            alt="Storytelling Edit"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl shadow-lg">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Storytelling Edit</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Narrative</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Sound Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 5: _7hlU73cTNw -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('_7hlU73cTNw', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/_7hlU73cTNw/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/_7hlU73cTNw/hqdefault.jpg'"
+                            alt="Commercial Promo"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl shadow-lg">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Commercial Promo</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Ads</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Motion Graphics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 6: E8LUuUK3WiE -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('E8LUuUK3WiE', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/E8LUuUK3WiE/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/E8LUuUK3WiE/hqdefault.jpg'"
+                            alt="Creative Showreel"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl shadow-lg">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Creative Showreel</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Showreel</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Best Of</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. PODCAST PRODUCTION (11 PROJECTS) -->
+        <div id="podcasts" class="reveal-item">
+            <div onclick="toggleFolder('podcast-grid', this)"
+                class="folder-tab glass-card rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-4 border-l-[#BFFF00] hover:bg-[#BFFF00]/[0.04] transition">
+                <div class="flex items-center gap-5">
+                    <div class="w-16 h-16 rounded-2xl bg-[#BFFF00]/15 border border-[#BFFF00]/40 flex items-center justify-center text-3xl folder-icon">
+                        📁
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h3 class="font-display font-black text-2xl sm:text-3xl text-white">Podcast Production</h3>
+                            <span class="px-3 py-0.5 rounded-full bg-[#BFFF00] text-black font-mono text-xs font-bold">11 PROJECTS</span>
+                        </div>
+                        <p class="text-sm text-neutral-400 mt-1">Multi-cam interviews, business talks, dynamic B-roll integration, and narrative podcast edits.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 text-[#BFFF00] font-mono text-xs uppercase tracking-wider self-end sm:self-center">
+                    <span class="folder-status-label">Click to Open</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+            </div>
+
+            <div id="podcast-grid" class="folder-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Podcast 1: CLC0xucQDL4 -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('CLC0xucQDL4', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/CLC0xucQDL4/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/CLC0xucQDL4/hqdefault.jpg'"
+                            alt="Deep Dive Interview" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Deep Dive Interview</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Multi-Cam</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Audio Sync</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 2: npHhQORpmvw -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('npHhQORpmvw', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/npHhQORpmvw/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/npHhQORpmvw/hqdefault.jpg'"
+                            alt="Business Talk" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Business Talk</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Clean Cuts</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">B-Roll</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 3: QVoPRdMINGc -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('QVoPRdMINGc', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/QVoPRdMINGc/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/QVoPRdMINGc/hqdefault.jpg'"
+                            alt="Tech Discussion" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Tech Discussion</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Graphics</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Color Grade</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 4: c_C2S5zEErk -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('c_C2S5zEErk', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/c_C2S5zEErk/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/c_C2S5zEErk/hqdefault.jpg'"
+                            alt="Creative Insight" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Creative Insight</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Storytelling</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Pacing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 5: TzrGmy9hF1s -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('TzrGmy9hF1s', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/TzrGmy9hF1s/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/TzrGmy9hF1s/hqdefault.jpg'"
+                            alt="Life Lessons" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Life Lessons</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Short Form</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Subtitles</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 6: 7rCONuqRgjg -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('7rCONuqRgjg', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/7rCONuqRgjg/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/7rCONuqRgjg/hqdefault.jpg'"
+                            alt="Strategy Session" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Strategy Session</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Zoom Edit</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Overlays</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 7: iNLnrKK4zZ8 -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('iNLnrKK4zZ8', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/iNLnrKK4zZ8/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/iNLnrKK4zZ8/hqdefault.jpg'"
+                            alt="Health & Wellness" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Health & Wellness</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Relaxed</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Audio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 8: nkvmj-xOltE -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('nkvmj-xOltE', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/nkvmj-xOltE/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/nkvmj-xOltE/hqdefault.jpg'"
+                            alt="Finance Tips" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Finance Tips</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Charts</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Info</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 9: he3UFRt869M -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('he3UFRt869M', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/he3UFRt869M/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/he3UFRt869M/hqdefault.jpg'"
+                            alt="Narrative Podcast" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Narrative Podcast</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Cinematic</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Vibe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 10: SkYMIRtmimY -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('SkYMIRtmimY', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/SkYMIRtmimY/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/SkYMIRtmimY/hqdefault.jpg'"
+                            alt="Future Trends" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Future Trends</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Tech</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Fast Paced</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Podcast 11: IEbbusxDXH4 -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group" onclick="openVideoModal('IEbbusxDXH4', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img src="https://img.youtube.com/vi/IEbbusxDXH4/maxresdefault.jpg"
+                            onerror="this.src='https://img.youtube.com/vi/IEbbusxDXH4/hqdefault.jpg'"
+                            alt="Startup Journey" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Startup Journey</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Motivational</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Highlight</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. EVENT EDITS (2 PROJECTS) -->
+        <div id="events" class="reveal-item">
+            <div onclick="toggleFolder('events-grid', this)"
+                class="folder-tab glass-card rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-l-4 border-l-[#BFFF00] hover:bg-[#BFFF00]/[0.04] transition">
+                <div class="flex items-center gap-5">
+                    <div class="w-16 h-16 rounded-2xl bg-[#BFFF00]/15 border border-[#BFFF00]/40 flex items-center justify-center text-3xl folder-icon">
+                        📁
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h3 class="font-display font-black text-2xl sm:text-3xl text-white">Event Edits</h3>
+                            <span class="px-3 py-0.5 rounded-full bg-[#BFFF00] text-black font-mono text-xs font-bold">2 PROJECTS</span>
+                        </div>
+                        <p class="text-sm text-neutral-400 mt-1">Cinematic event highlights, slow-motion grading, and high-energy recap edits.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 text-[#BFFF00] font-mono text-xs uppercase tracking-wider self-end sm:self-center">
+                    <span class="folder-status-label">Click to Open</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+            </div>
+
+            <div id="events-grid" class="folder-content grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Event 1: 1XE_5EmjVKD5gH_yzudiDdQWxHf5kZrjv -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group"
+                    onclick="openDriveModal('1XE_5EmjVKD5gH_yzudiDdQWxHf5kZrjv', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img referrerpolicy="no-referrer" src="https://drive.google.com/thumbnail?id=1XE_5EmjVKD5gH_yzudiDdQWxHf5kZrjv&sz=w800"
+                            alt="Cinematic Event Highlight"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Cinematic Event Highlight</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">Slow Motion</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Color Grade</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2: 19P0B9-9a6qmALTReeZvfVIL2ujWMxUhs -->
+                <div class="work-card glass-card rounded-2xl overflow-hidden group"
+                    onclick="openDriveModal('19P0B9-9a6qmALTReeZvfVIL2ujWMxUhs', '16/9')">
+                    <div class="relative aspect-video overflow-hidden bg-black">
+                        <img referrerpolicy="no-referrer" src="https://drive.google.com/thumbnail?id=19P0B9-9a6qmALTReeZvfVIL2ujWMxUhs&sz=w800"
+                            alt="Party / Recap Edit"
+                            class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                            <span class="w-14 h-14 rounded-full bg-[#BFFF00] text-black flex items-center justify-center text-xl">▶</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-display font-bold text-lg text-white mb-3 group-hover:text-[#BFFF00] transition">Party / Recap Edit</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/5 border border-white/10 text-neutral-300">High Energy</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-mono bg-[#BFFF00]/10 border border-[#BFFF00]/30 text-[#BFFF00]">Transitions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT SECTION ================= -->
+    <section id="contact" class="py-24 px-4 sm:px-8 max-w-5xl mx-auto">
+        <div class="glass-card rounded-3xl p-8 sm:p-14 text-center border border-[#BFFF00]/30 relative overflow-hidden reveal-item">
+            <div class="absolute -bottom-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#BFFF00]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <span class="font-mono text-xs uppercase tracking-[0.25em] text-[#BFFF00] block mb-3">// READY FOR TAKEOFF</span>
+            <h2 class="font-display font-black text-4xl sm:text-6xl text-white mb-4">
+                Let's <span class="text-[#BFFF00]">Collaborate</span>
+            </h2>
+            <p class="text-neutral-300 max-w-lg mx-auto mb-10 text-base sm:text-lg">
+                Ready to create something amazing? Reach out for freelance edits, motion graphics retainers, or studio collaborations.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10">
+                <a href="tel:+919855025623" class="glass-card rounded-2xl p-5 hover:border-[#BFFF00] transition group">
+                    <div class="text-2xl mb-2">📞</div>
+                    <div class="text-xs font-mono uppercase text-neutral-400 mb-1">Phone</div>
+                    <div class="font-mono font-semibold text-sm text-white group-hover:text-[#BFFF00] transition">+91 98550 25623</div>
+                </a>
+
+                <a href="mailto:arshpreet666777@gmail.com" class="glass-card rounded-2xl p-5 hover:border-[#BFFF00] transition group">
+                    <div class="text-2xl mb-2">📧</div>
+                    <div class="text-xs font-mono uppercase text-neutral-400 mb-1">Email</div>
+                    <div class="font-mono font-semibold text-xs sm:text-sm text-white group-hover:text-[#BFFF00] break-all transition">arshpreet666777@gmail.com</div>
+                </a>
+
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="text-2xl mb-2">📍</div>
+                    <div class="text-xs font-mono uppercase text-neutral-400 mb-1">Location</div>
+                    <div class="font-mono font-semibold text-sm text-white">9-Phase, Mohali</div>
+                </div>
+            </div>
+
+            <a href="mailto:arshpreet666777@gmail.com" class="btn-lime inline-flex items-center gap-2.5 px-9 py-4 rounded-full font-mono text-sm sm:text-base uppercase tracking-wider">
+                <span>Send an Email</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="border-t border-white/10 bg-[#040604] py-12 px-4 sm:px-8 text-center">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="font-display font-black text-xl tracking-wider text-white">
+                AJ <span class="text-[#BFFF00]">CREATIVE</span>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 text-sm font-mono text-neutral-400">
+                <a href="#showreel" class="hover:text-[#BFFF00] transition">Instagram</a>
+                <a href="#about" class="hover:text-[#BFFF00] transition">LinkedIn</a>
+                <a href="#longform" class="hover:text-[#BFFF00] transition">Behance</a>
+                <a href="#shorts" class="hover:text-[#BFFF00] transition">YouTube</a>
+            </div>
+
+            <p class="text-xs text-neutral-500 font-mono">
+                © 2025 Arshpreet Singh. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ================= VIDEO PLAYER MODAL ================= -->
+    <div class="modal-backdrop" id="modal">
+        <div class="relative w-full max-w-4xl rounded-3xl overflow-hidden bg-black border border-[#BFFF00]/40 shadow-[0_0_60px_rgba(191,255,0,0.2)]">
+            <div class="flex items-center justify-between px-5 py-3 bg-[#0E120E] border-b border-white/10">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#BFFF00]"></span>
+                    <span class="font-mono text-xs uppercase tracking-wider text-neutral-300">AJ CREATIVE Cinema Player</span>
+                </div>
+                <button onclick="closeModal()" aria-label="Close modal"
+                    class="w-9 h-9 rounded-xl bg-white/10 hover:bg-[#BFFF00] hover:text-black text-white font-mono text-xl font-bold transition flex items-center justify-center">&times;</button>
+            </div>
+            <div class="w-full flex items-center justify-center bg-black p-2" id="video-container">
+                <!-- Dynamic iframe injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        // --- 1. CUSTOM CURSOR ---
+        const cursorDot = document.querySelector('[data-cursor-dot]');
+        const cursorOutline = document.querySelector('[data-cursor-outline]');
+        const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+        if (isFinePointer && cursorDot && cursorOutline) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 400, fill: 'forwards' });
+            });
+
+            const bindHoverTargets = () => {
+                const targets = document.querySelectorAll('a, button, .work-card, .short-item, .motion-card, .sw-icon, .folder-tab');
+                targets.forEach(el => {
+                    el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                    el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+                });
+            };
+            bindHoverTargets();
+        }
+
+        // --- 2. MOBILE MENU ---
+        window.toggleMobileMenu = function () {
+            const drawer = document.getElementById('mobileMenuDrawer');
+            if (drawer) {
+                drawer.classList.toggle('hidden');
+                drawer.classList.toggle('flex');
+            }
+        };
+
+        // --- 3. SHOWREEL STUDIO SWITCHER & CUSTOM THUMBNAILS ---
+        let currentTopReelKey = 'main';
+        const showreelData = {
+            main: {
+                id: '1Pz78VmHjDp47EphWU36Pc2HCS_gLqNZK',
+                thumbId: '1dT1tkIvtsck-M5DkQvTSwYAbRv1V-w-I',
+                title: 'New Main Showreel — Creative Motion & Editing',
+                desc: 'High-impact compilation of kinetic typography, visual effects, and dynamic cuts.',
+                link: 'https://drive.google.com/file/d/1Pz78VmHjDp47EphWU36Pc2HCS_gLqNZK/view?usp=sharing',
+                aspect: 'aspect-video max-w-full'
+            },
+            desktop: {
+                id: '1BuuEnoeOG37S9UjjgejxotcjCJRi6dtG',
+                thumbId: '18tVKQfok8dax7b85E1duWlUfj73XMPqq',
+                title: 'Motion Graphics Showreel (Desktop 16:9)',
+                desc: 'Dedicated horizontal widescreen motion graphics reel crafted for desktop & broadcast.',
+                link: 'https://drive.google.com/file/d/1BuuEnoeOG37S9UjjgejxotcjCJRi6dtG/view?usp=sharing',
+                aspect: 'aspect-video max-w-full'
+            },
+            mobile: {
+                id: '1PDHFyq2hJsXwwp1T5UEpQME1_91ukQ4H',
+                thumbId: '14Cq2hCW_vIX2sO8C0qJ0jKkGlFPJOMZm',
+                title: 'Motion Graphics Showreel (Mobile / Vertical)',
+                desc: 'High-retention vertical motion graphics reel designed for mobile & social media feeds.',
+                link: 'https://drive.google.com/file/d/1PDHFyq2hJsXwwp1T5UEpQME1_91ukQ4H/view?usp=sharing',
+                aspect: 'aspect-[9/16] max-w-[380px]'
+            },
+            legacy: {
+                id: '1lZtJHq1pD4edvhpL0TBN_JEQzzPpHE0N',
+                thumbId: '1aVf7q2KvqOlumwqpHWgUVEM_QlYIPSl1',
+                title: 'Classic Showreel Archive (2025)',
+                desc: 'Previous portfolio showreel compilation preserved in the archive.',
+                link: 'https://drive.google.com/file/d/1lZtJHq1pD4edvhpL0TBN_JEQzzPpHE0N/view?usp=sharing',
+                aspect: 'aspect-video max-w-full'
+            }
+        };
+
+        window.renderReelThumbnail = function (key) {
+            const item = showreelData[key];
+            const wrapper = document.getElementById('showreel-container');
+            if (!wrapper || !item) return;
+            wrapper.className = `group relative w-full overflow-hidden rounded-2xl bg-black max-h-[75vh] mx-auto transition-all duration-500 ${item.aspect}`;
+            wrapper.setAttribute('onclick', `playInlineReel('${key}')`);
+            wrapper.innerHTML = `
+                <img referrerpolicy="no-referrer" src="https://lh3.googleusercontent.com/d/${item.thumbId}=w1920"
+                    onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='https://drive.google.com/thumbnail?id=${item.thumbId}&sz=w1920'}"
+                    alt="${item.title} Thumbnail"
+                    class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none"></div>
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/35 backdrop-blur-md border border-[#BFFF00]/75 text-[#BFFF00] flex items-center justify-center shadow-[0_0_20px_rgba(191,255,0,0.3)] group-hover:bg-[#BFFF00]/25 group-hover:scale-110 transition duration-300">
+                        <svg viewBox="0 0 24 24" class="w-6 h-6 sm:w-7 sm:h-7 fill-current ml-0.5">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                </div>
+            `;
+        };
+
+        window.playInlineReel = function (target) {
+            if (target === 'desktop-stage') {
+                const stage = document.getElementById('desktop-motion-stage');
+                if (stage) {
+                    stage.removeAttribute('onclick');
+                    stage.innerHTML = `<iframe src="https://drive.google.com/file/d/1BuuEnoeOG37S9UjjgejxotcjCJRi6dtG/preview?autoplay=1" class="w-full h-full border-0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+                }
+                return;
+            }
+            if (target === 'mobile-stage') {
+                const stage = document.getElementById('mobile-motion-stage');
+                if (stage) {
+                    stage.removeAttribute('onclick');
+                    stage.innerHTML = `<iframe src="https://drive.google.com/file/d/1PDHFyq2hJsXwwp1T5UEpQME1_91ukQ4H/preview?autoplay=1" class="w-full h-full border-0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+                }
+                return;
+            }
+
+            const key = showreelData[target] ? target : currentTopReelKey;
+            const item = showreelData[key];
+            const wrapper = document.getElementById('showreel-container');
+            if (wrapper && item) {
+                wrapper.className = `group relative w-full overflow-hidden rounded-2xl bg-black max-h-[75vh] mx-auto transition-all duration-500 ${item.aspect}`;
+                wrapper.removeAttribute('onclick');
+                wrapper.innerHTML = `<iframe id="showreel-iframe" src="https://drive.google.com/file/d/${item.id}/preview?autoplay=1" class="w-full h-full border-0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+            }
+        };
+
+        window.switchShowreel = function (key) {
+            const item = showreelData[key];
+            if (!item) return;
+            currentTopReelKey = key;
+
+            // Single-click play directly when switching tabs so user doesn't have to click twice
+            playInlineReel(key);
+
+            const titleEl = document.getElementById('active-reel-title');
+            const descEl = document.getElementById('active-reel-desc');
+            const linkEl = document.getElementById('active-reel-direct-link');
+
+            if (titleEl) titleEl.textContent = item.title;
+            if (descEl) descEl.textContent = item.desc;
+            if (linkEl) linkEl.href = item.link;
+
+            // Update tab button styles
+            ['main', 'desktop', 'mobile', 'legacy'].forEach(k => {
+                const btn = document.getElementById(`tab-reel-${k}`);
+                if (!btn) return;
+                if (k === key) {
+                    btn.className = 'reel-tab px-5 py-3 rounded-2xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all bg-[#BFFF00] text-black shadow-[0_0_20px_rgba(191,255,0,0.35)] flex items-center gap-2';
+                } else {
+                    btn.className = 'reel-tab px-5 py-3 rounded-2xl font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all bg-white/5 text-neutral-300 border border-white/10 hover:border-[#BFFF00]/50 flex items-center gap-2';
+                }
+            });
+        };
+
+        // --- 4. FOLDER ACCORDION SYSTEM ---
+        window.toggleFolder = function (gridId, triggerEl) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+            const icon = triggerEl ? triggerEl.querySelector('.folder-icon') : null;
+            const label = triggerEl ? triggerEl.querySelector('.folder-status-label') : null;
+
+            grid.classList.toggle('open');
+            const isOpen = grid.classList.contains('open');
+
+            if (icon) icon.textContent = isOpen ? '📂' : '📁';
+            if (label) label.textContent = isOpen ? 'Click to Collapse' : 'Click to Open';
+        };
+
+        window.expandAllFolders = function (expand) {
+            const ids = ['longform-grid', 'podcast-grid', 'events-grid'];
+            ids.forEach(id => {
+                const grid = document.getElementById(id);
+                if (!grid) return;
+                if (expand) {
+                    grid.classList.add('open');
+                } else {
+                    grid.classList.remove('open');
+                }
+            });
+            document.querySelectorAll('.folder-icon').forEach(ic => {
+                ic.textContent = expand ? '📂' : '📁';
+            });
+            document.querySelectorAll('.folder-status-label').forEach(lb => {
+                lb.textContent = expand ? 'Click to Collapse' : 'Click to Open';
+            });
+        };
+
+        // --- 5. SHORTS CAROUSEL CONTROLS ---
+        window.scrollShorts = function (offset) {
+            const track = document.getElementById('shorts-slider-track');
+            if (track) {
+                track.scrollBy({ left: offset, behavior: 'smooth' });
+            }
+        };
+
+        window.scrollLatestShorts = function (offset) {
+            const track = document.getElementById('latest-shorts-track');
+            if (track) {
+                track.scrollBy({ left: offset, behavior: 'smooth' });
+            }
+        };
+
+        // --- 6. MODAL LOGIC (YOUTUBE & GOOGLE DRIVE) ---
+        const modal = document.getElementById('modal');
+        const videoContainer = document.getElementById('video-container');
+
+        window.openVideoModal = function (videoId, ratio = '16/9') {
+            const maxW = ratio === '9/16' ? '380px' : '100%';
+            videoContainer.innerHTML = `
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    style="aspect-ratio: ${ratio}; max-height: 78vh; max-width: ${maxW}; border-radius: 12px;">
+                </iframe>
+            `;
+            modal.classList.add('active');
+        };
+
+        window.openDriveModal = function (driveId, ratio = '16/9') {
+            const maxW = ratio === '9/16' ? '380px' : '100%';
+            videoContainer.innerHTML = `
+                <iframe 
+                    src="https://drive.google.com/file/d/${driveId}/preview?autoplay=1" 
+                    width="100%" 
+                    height="100%" 
+                    style="border: 0; aspect-ratio: ${ratio}; max-height: 78vh; max-width: ${maxW}; border-radius: 12px;" 
+                    allow="autoplay"
+                    allowfullscreen>
+                </iframe>
+            `;
+            modal.classList.add('active');
+        };
+
+        window.closeModal = function () {
+            modal.classList.remove('active');
+            videoContainer.innerHTML = '';
+        };
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // --- 7. SCROLL REVEAL & PROGRESS BAR ---
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.08 });
+
+        document.querySelectorAll('.reveal-item').forEach(el => revealObserver.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const topBar = document.getElementById('topScrollBar');
+            const backToTop = document.getElementById('backToTop');
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+
+            const safePct = Math.min(Math.max(progress, 0), 100);
+            if (topBar) topBar.style.width = `${safePct}%`;
+            const sFill = document.getElementById('scrollFill');
+            const sMouse = document.getElementById('scrollMouse');
+            if (sFill) sFill.style.height = `${safePct}%`;
+            if (sMouse) sMouse.style.top = `${safePct}%`;
+            if (backToTop) {
+                if (window.scrollY > 450) {
+                    backToTop.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                    backToTop.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                } else {
+                    backToTop.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                    backToTop.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                }
+            }
+        });
+
+        // --- 8. TYPEWRITER QUOTE EFFECT ---
+        (function initTypewriter() {
+            const text = '"Editing is not just arranging clips, it\'s my passion."';
+            const el = document.getElementById('typewriter-quote');
+            if (!el) return;
+            let idx = 0;
+            el.innerHTML = '<span class="cursor-blink"></span>';
+            function step() {
+                if (idx < text.length) {
+                    el.innerHTML = text.substring(0, idx + 1) + '<span class="cursor-blink"></span>';
+                    idx++;
+                    setTimeout(step, 42);
+                }
+            }
+            let started = false;
+            const start = () => { if (!started) { started = true; setTimeout(step, 500); } };
+            if (document.documentElement.classList.contains('ap-intro-pending') || window.__apIntroActive) {
+                document.addEventListener('ap-intro:done', start, { once: true });
+                setTimeout(start, 15000); // safety net if the intro never reports back
+            } else {
+                start();
+            }
+        })();
+    </script>
+</body>
+
+</html>
